@@ -7,9 +7,13 @@
 // BootstrapVue and its default variables
 @import "../../node_modules/bootstrap-vue/src/index.scss";
 
+@import "./components/stockCard";
+@import "./views/home";
+
 body {
   box-sizing: border-box;
   font-family: "Open Sans", sans-serif;
   margin: 0;
   padding: 0;
+  width: 100%;
 }

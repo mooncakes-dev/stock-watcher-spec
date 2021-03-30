@@ -8,6 +8,6 @@
 @import "./scss/main.scss";
 
 #app {
-  background-color: #f5f5f5;
+  background-color: #f8f5f5;
 }
 </style>

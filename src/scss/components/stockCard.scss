@@ -1,0 +1,60 @@
+.stock-card {
+  border: none;
+  box-shadow: 0px 5px 25px 7px rgba(145, 154, 160, 0.24);
+  width: 22rem;
+
+  .card-title {
+    color: var(--type);
+    font-size: 1rem;
+    font-weight: 800;
+  }
+
+  .card-subtitle {
+    color: var(--caption);
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  .value-status {
+    font-size: 0.8rem;
+    font-weight: 600;
+
+    &--positive {
+      @extend .value-status;
+      color: var(--green-dark);
+    }
+
+    &--negative {
+      @extend .value-status;
+      color: var(--red-dark);
+    }
+  }
+
+  .value-percent {
+    &--positive {
+      color: var(--green-light);
+    }
+
+    &--negative {
+      color: var(--red-light);
+    }
+  }
+
+  .card-text.--current-value {
+    color: var(--type);
+    font-size: 1.5rem;
+  }
+
+  .card-text {
+    &.--stats {
+      color: var(--caption);
+      font-size: 0.8rem;
+      font-weight: 600;
+
+      .stat-value {
+        color: var(--type);
+        margin: 5px;
+      }
+    }
+  }
+}

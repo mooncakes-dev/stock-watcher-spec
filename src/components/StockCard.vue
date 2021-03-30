@@ -1,86 +1,62 @@
 <template>
-  <b-card title="ALPHABET INC. CL C" sub-title="GOOG" class="mb-3 stock-card">
+  <b-card :title="name" :sub-title="symbol" class="mb-3 stock-card">
     <b-card-text class="--current-value">
-      706.32
-      <span class="value-status ml-2">
-        <b-icon-arrow-up></b-icon-arrow-up>
-        15.32
-        <span class="value-percent">(2.22%)</span>
-      </span>
+      {{ current }}
+      <template v-if="priceChange > 0">
+        <span class="value-status--positive ml-2">
+          <b-icon-arrow-up></b-icon-arrow-up>
+          {{ priceChange }}
+          <span class="value-percent--positive">({{ percentChange }}%)</span>
+        </span>
+      </template>
+      <template v-else>
+        <span class="value-status--negative ml-2">
+          <b-icon-arrow-down></b-icon-arrow-down>
+          {{ priceChange }}
+          <span class="value-percent--negative">({{ percentChange }}%)</span>
+        </span>
+      </template>
     </b-card-text>
     <b-card-text class="--stats">
-      OPEN <span class="stat-value">691</span> HIGH
-      <span class="stat-value">709.28</span> LOW
-      <span class="stat-value">689.47</span>
+      OPEN <span class="stat-value">{{ open }}</span> HIGH
+      <span class="stat-value">{{ high }}</span> LOW
+      <span class="stat-value">{{ low }}</span>
     </b-card-text>
   </b-card>
 </template>
 
 <script>
 export default {
-  name: 'StockCard',
+  name: "StockCard",
   props: {
     name: String,
-    company: String,
-    current_value: String,
-    open_value: String,
-    high_value: String,
-    low_value: String
+    symbol: String,
+    current: String,
+    open: String,
+    high: String,
+    low: String,
   },
+  priceChange: 0,
+  percentChange: 0,
+
   created() {
-    this.valuePercentChange();
+    this.valueChange();
+    this.percentChange();
   },
   methods: {
-    valuePercentChange() {
-      
-    }
-  }
-}
-</script>
-
-<style lang="scss">
-.stock-card {
-  box-shadow: 0px 5px 25px 7px rgba(145, 154, 160, 0.4);
-  width: 25rem;
-
-  .card-title {
-    color: var(--type);
-    font-size: 1rem;
-    font-weight: 800;
-  }
-
-  .card-subtitle {
-    color: var(--caption);
-    font-size: 0.8rem;
-    font-weight: 600;
-  }
-
-  .value-status {
-    color: var(--green-dark);
-    font-size: 0.8rem;
-    font-weight: 600;
-  }
-
-  .value-percent {
-    color: var(--green-light);
-  }
-
-  .card-text.--current-value {
-    color: var(--type);
-    font-size: 1.5rem;
-  }
-
-  .card-text {
-    &.--stats {
-      color: var(--caption);
-      font-size: 0.8rem;
-      font-weight: 600;
-
-      .stat-value {
-        color: var(--type);
-        margin: 5px;
+    valueChange() {
+      if (this.current > this.open) {
+        this.priceChange = (Math.round((this.current - this.open) * 100) / 100).toFixed(2);
+      } else if (this.current < this.open) {
+        this.priceChange = -Math.abs(
+          (Math.round((this.open - this.current) * 100) / 100).toFixed(2));
       }
-    }
-  }
-}
-</style>
+      return this.priceChange;
+    },
+
+    percentChange() {
+      return this.percentChange = ((this.priceChange / this.open) * 100).toFixed(2);
+    },
+  },
+};
+</script>

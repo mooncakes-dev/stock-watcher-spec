@@ -15,65 +15,73 @@
       </b-form>
     </div>
     <div class="main">
-      <StockCard></StockCard>
+      <StockCard
+        v-for="stock in stocks"
+        :key="stock.symbol"
+        :name="stock.name"
+        :symbol="stock.symbol"
+        :open="stock.open"
+        :high="stock.high"
+        :low="stock.low"
+        :current="stock.current"
+      ></StockCard>
     </div>
   </div>
 </template>
 
 <script>
-import StockCard from '@/components/StockCard.vue'
+import StockCard from "@/components/StockCard.vue";
 
 export default {
-  name: 'Home',
+  name: "Home",
   components: {
-    StockCard
-  }
-}
+    StockCard,
+  },
+  data() {
+    return {
+      stocks: [
+        {
+          name: "Alphabet Inc. CL C",
+          symbol: "GOOG",
+          current: "706.32",
+          open: "691",
+          high: "709.28",
+          low: "689.47",
+        },
+        {
+          name: "YAHOO! Inc",
+          symbol: "YHOO",
+          current: "29.27",
+          open: "29.28",
+          high: "29.66",
+          low: "29.06",
+        },
+        {
+          name: "American International",
+          symbol: "AIG",
+          current: "53.08",
+          open: "52.06",
+          high: "53.47",
+          low: "52.28",
+        },
+        {
+          name: "Groupon Inc",
+          symbol: "GRPN",
+          current: "3.74",
+          open: "4.08",
+          high: "4.13",
+          low: "3.60",
+        },
+        {
+          name: "3x Inverse Crude",
+          symbol: "DWTIF",
+          current: "253.41",
+          open: "307.10",
+          high: "297.50",
+          low: "245.59",
+        },
+      ],
+    };
+  },
+};
 </script>
-
-<style lang="scss">
-$gap: 4vh;
-.container {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  gap: $gap;
-  justify-content: flex-start;
-  min-height: 100vh;
-
-  .header {
-    display: flex;
-    flex-direction: column;
-    flex-basis: 100%;
-    height: 20vh;
-    gap: $gap;
-
-    .title {
-      color: var(--type);
-      font-size: 50px;
-      font-weight: 700;
-      margin-top: 4vh;
-    }
-
-    .stock-input {
-      background-color: #f5f5f5;
-      font-size: 0.9rem;
-      padding: 1.4rem 2.5rem 1.4rem 1rem;
-    }
-
-    .stock-btn {
-      box-shadow: 0px 5px 25px 7px rgba(145, 154, 160, 0.4);
-      font-weight: 700;
-      font-size: 0.8rem;
-      padding: 0.8rem 2rem;
-    }
-  }
-
-  .main {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: $gap;
-  }
-}
-</style>
